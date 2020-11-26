@@ -27,8 +27,13 @@ function loginSubmitButton(event) {
     let email = document.getElementById('email-login-input').value;
     let password = document.getElementById('password-login-input').value;
 
-    //to FINISH
-
+    authServices.loginUser(email, password)
+    .then(res => navigate('home'))
+    .catch(e => {
+        console.log('WRONG CREDENTIALS');
+        return; 
+    })
+    
 }
 
 function registerSubmitButton(event) {
@@ -45,8 +50,14 @@ function registerSubmitButton(event) {
         return;
     }
 
+    authServices.registerUser(email, password)
+    .then(res => {
+        authServices.loginUser(email, password)
+    .then(data => {
+       navigate('home')
+    })})
     
-
+  
     //to FINISH
 }
 
