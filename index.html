@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles.css">
     <link rel="icon" type="image/png" href="./public/favicon.png">
+    <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
     <title>Shoe Shelf</title>
 </head>
 
@@ -29,7 +30,27 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="root">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+    <footer>
+        <p><a href="https://softuni.bg">Software University</a> - JS Applications @ 2020</p>
+    </footer>
+
+    <script type="text/x-handlebars-template" id="guest-home-template">
         <div class="container">
             <div class="about-us">
                 <div>
@@ -41,7 +62,127 @@
                 </p>
             </div>
         </div>
+    </script>
 
+    <script type="text/x-handlebars-template" id="new-offer-template">
+        <h1>Create New Offer</h1>
+        <p class="message"></p>
+        <form>
+            <div>
+                <input type="text" placeholder="Name...">
+            </div>
+            <div>
+                <input type="text" placeholder="Price...">
+            </div>
+            <div>
+                <input type="text" placeholder="Image url...">
+            </div>
+            <div>
+                <textarea placeholder="Give us some description about this offer..."></textarea>
+            </div>
+            <div>
+                <input type="text" placeholder="Brand...">
+            </div>
+            <div>
+                <button>Create</button>
+            </div>
+        </form>
+    </script>
+    
+    <script type="text/x-handlebars-template" id="offer-details-template">
+        <div class="offer-details">
+            <h1>Under Armour HOVR</h1>
+            <div class="info">
+                <img src="https://i1.t4s.cz/products/3023295-602/under-armour-ua-w-hovr-phantom-se-trek-263676-3023295-603.jpg"
+                    alt="">
+                <div class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis explicabo
+                    voluptatibus odio? Deleniti amet qui tenetur ipsa enim blanditiis laboriosam distinctio, dignissimos
+                    cupiditate, delectus autem. Explicabo exercitationem voluptatibus reprehenderit repellat. Lorem
+                    ipsum dolor, sit amet consectetur adipisicing elit. Tempore reiciendis maiores aliquid nobis,
+                    accusantium dolore iste ipsa atque deserunt corrupti maxime, alias neque libero temporibus expedita
+                    magni perferendis aut nostrum.
+                    <br>
+                    <br>
+                    <p class="price">$149.99</p>
+                </div>
+            </div>
+            <div class="actions">
+                <a>Edit</a>
+                <a>Delete</a>
+                <a>Buy</a>
+                <span>You bought it</span>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/x-handlebars-template" id="edit-offer">
+        <h1>Edit Offer</h1>
+        <p class="message"></p>
+        <form>
+            <div>
+                <input type="text" placeholder="Name...">
+            </div>
+            <div>
+                <input type="text" placeholder="Price...">
+            </div>
+            <div>
+                <input type="text" placeholder="Image url...">
+            </div>
+            <div>
+                <textarea placeholder="Give us some description about this offer..."></textarea>
+            </div>
+            <div>
+                <input type="text" placeholder="Brand...">
+            </div>
+            <div>
+                <button>Edit</button>
+            </div>
+        </form>
+    </script>
+
+    <script type="text/x-handlebars-template" id="login-template">
+        <h1>Login</h1>
+        <p class="form-info">Don't have account?
+            <a href="../user/register.html">Register now</a> and fix that!
+        </p>
+        <form action="">
+            <div>
+                <input type="email" placeholder="Email...">
+            </div>
+
+            <div>
+                <input type="password" placeholder="Password...">
+            </div>
+            <div> 
+                <button>Login</button>
+            </div>
+        </form>
+    </script>
+
+    <script type="text/x-handlebars-template" id="register-template">
+        <h1>Register</h1>
+        <p class="form-info">Already registered?
+            <a href="">Login now</a> and have some fun!
+        </p>
+
+        <form action="">
+            <div>
+                <input type="email" placeholder="Email...">
+            </div>
+            <div>
+                <input type="password" placeholder="Password">
+            </div>
+            <div>
+                <input type="password" placeholder="Re-password">
+            </div>
+            <div>
+                <p class="message"></p>
+                <button>Register</button>
+            </div>
+        </form>
+    </script>
+
+    <script type="text/x-handlebars-template" id="shoes-template">
         <div class="shoes">
             <div class="shoe">
                 <img src="https://i1.t4s.cz/products/ar4149-001/nike-air-zoom-pegasus-36-gs-251390-ar4149-001.jpeg">
@@ -73,119 +214,8 @@
                 <a>Buy it for $140,00</a>
             </div>
         </div>
+    </script>
 
-        <h1>Create New Offer</h1>
-        <p class="message"></p>
-        <form>
-            <div>
-                <input type="text" placeholder="Name...">
-            </div>
-            <div>
-                <input type="text" placeholder="Price...">
-            </div>
-            <div>
-                <input type="text" placeholder="Image url...">
-            </div>
-            <div>
-                <textarea placeholder="Give us some description about this offer..."></textarea>
-            </div>
-            <div>
-                <input type="text" placeholder="Brand...">
-            </div>
-            <div>
-                <button>Create</button>
-            </div>
-        </form>
-
-        <div class="offer-details">
-            <h1>Under Armour HOVR</h1>
-            <div class="info">
-                <img src="https://i1.t4s.cz/products/3023295-602/under-armour-ua-w-hovr-phantom-se-trek-263676-3023295-603.jpg"
-                    alt="">
-                <div class="description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis explicabo
-                    voluptatibus odio? Deleniti amet qui tenetur ipsa enim blanditiis laboriosam distinctio, dignissimos
-                    cupiditate, delectus autem. Explicabo exercitationem voluptatibus reprehenderit repellat. Lorem
-                    ipsum dolor, sit amet consectetur adipisicing elit. Tempore reiciendis maiores aliquid nobis,
-                    accusantium dolore iste ipsa atque deserunt corrupti maxime, alias neque libero temporibus expedita
-                    magni perferendis aut nostrum.
-                    <br>
-                    <br>
-                    <p class="price">$149.99</p>
-                </div>
-            </div>
-            <div class="actions">
-                <a>Edit</a>
-                <a>Delete</a>
-                <a>Buy</a>
-                <span>You bought it</span>
-            </div>
-        </div>
-
-        <h1>Edit Offer</h1>
-        <p class="message"></p>
-        <form>
-            <div>
-                <input type="text" placeholder="Name...">
-            </div>
-            <div>
-                <input type="text" placeholder="Price...">
-            </div>
-            <div>
-                <input type="text" placeholder="Image url...">
-            </div>
-            <div>
-                <textarea placeholder="Give us some description about this offer..."></textarea>
-            </div>
-            <div>
-                <input type="text" placeholder="Brand...">
-            </div>
-            <div>
-                <button>Edit</button>
-            </div>
-        </form>
-
-        <h1>Login</h1>
-        <p class="form-info">Don't have account?
-            <a href="../user/register.html">Register now</a> and fix that!
-        </p>
-        <form action="">
-            <div>
-                <input type="email" placeholder="Email...">
-            </div>
-
-            <div>
-                <input type="password" placeholder="Password...">
-            </div>
-            <div> 
-                <button>Login</button>
-            </div>
-        </form>
-
-        <h1>Register</h1>
-        <p class="form-info">Already registered?
-            <a href="">Login now</a> and have some fun!
-        </p>
-
-        <form action="">
-            <div>
-                <input type="email" placeholder="Email...">
-            </div>
-            <div>
-                <input type="password" placeholder="Password">
-            </div>
-            <div>
-                <input type="password" placeholder="Re-password">
-            </div>
-            <div>
-                <p class="message"></p>
-                <button>Register</button>
-            </div>
-        </form>
-
-    </main>
-    <footer>
-        <p><a href="https://softuni.bg">Software University</a> - JS Applications @ 2020</p>
-    </footer>
 </body>
 
 </html>
