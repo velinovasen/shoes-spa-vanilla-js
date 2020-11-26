@@ -7,28 +7,15 @@
     <link rel="stylesheet" href="../public/styles.css">
     <link rel="icon" type="image/png" href="./public/favicon.png">
     <script src="./node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="router.js" defer></script>
+    <script src="init.js" defer></script>
+    <script src="services.js" defer></script>
     <title>Shoe Shelf</title>
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="">Create new offer</a>
-                </li> 
-                <li class="site-logo">Shoe</li>
-                <li>
-                    <a href="">
-                        <img src="../public/sneakers.png" alt="">
-                    </a>
-                </li> 
-                <li class="site-logo">Shelf</li>
-                <li>Welcome, xxx@xx.xxx | 
-                    <a  href="">Logout</a>
-                </li>
-            </ul>
-        </nav>
+    <header id="header-element">
+
     </header>
     <main id="root">
 
@@ -50,7 +37,7 @@
         <p><a href="https://softuni.bg">Software University</a> - JS Applications @ 2020</p>
     </footer>
 
-    <script type="text/x-handlebars-template" id="guest-home-template">
+    <script type="text/x-handlebars-template" id="home-template">
         <div class="container">
             <div class="about-us">
                 <div>
@@ -58,7 +45,7 @@
                     <img src="../public/shoes2.jpg" alt="">
                 </div>
                 <p>
-                    <a href="">Register Now</a> and Try it!
+                    <a href="/register" onclick="onRegisterButton(event)">Register Now</a> and Try it!
                 </p>
             </div>
         </div>
@@ -143,18 +130,18 @@
     <script type="text/x-handlebars-template" id="login-template">
         <h1>Login</h1>
         <p class="form-info">Don't have account?
-            <a href="../user/register.html">Register now</a> and fix that!
+            <a href="/register" onclick="onRegisterButton(event)">Register now</a> and fix that!
         </p>
         <form action="">
             <div>
-                <input type="email" placeholder="Email...">
+                <input type="email" placeholder="Email..." id="email-login-input">
             </div>
 
             <div>
-                <input type="password" placeholder="Password...">
+                <input type="password" placeholder="Password..." id="password-login-input">
             </div>
             <div> 
-                <button>Login</button>
+                <button href="/home" onclick="loginSubmitButton(event)">Login</button>
             </div>
         </form>
     </script>
@@ -162,18 +149,18 @@
     <script type="text/x-handlebars-template" id="register-template">
         <h1>Register</h1>
         <p class="form-info">Already registered?
-            <a href="">Login now</a> and have some fun!
+            <a href="/login" onclick="loginNowButton(event)">Login now</a> and have some fun!
         </p>
 
         <form action="">
             <div>
-                <input type="email" placeholder="Email...">
+                <input type="email" placeholder="Email..." id="email-register-input">
             </div>
             <div>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" id="password-register-input">
             </div>
             <div>
-                <input type="password" placeholder="Re-password">
+                <input type="password" placeholder="Re-password" id="password2-register-input">
             </div>
             <div>
                 <p class="message"></p>
@@ -216,6 +203,34 @@
         </div>
     </script>
 
+    <script type="text/x-handlebars-template" id="navbar">
+        <nav>
+            {{#if isAuth}}
+                <ul>
+                    <li>
+                        <a href="">Create new offer</a>
+                    </li> 
+                    <li class="site-logo">Shoe</li>
+                    <li>
+                        <a href=""><img src="../public/sneakers.png" alt=""></a>
+                    </li> 
+                    <li class="site-logo">Shelf</li>
+                    <li>Welcome, xxx@xx.xxx | 
+                        <a  href="">Logout</a>
+                    </li>
+                </ul>
+            {{else}}
+                <ul>
+                    <li class="site-logo">Shoe</li>
+                    <li>
+                        <a href=""><img src="../public/sneakers.png" alt=""></a>
+                    </li> 
+                    <li class="site-logo">Shelf</li>
+                </ul>
+            {{/if}}
+
+        </nav>
+    </script>
 </body>
 
 </html>
