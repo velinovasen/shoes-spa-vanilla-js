@@ -68,8 +68,13 @@ const shoeServices = {
         return data;
     },
 
-    async buyShoes(id, client) {
-        console.log(id, client)
-    }
+    async buyShoes(id, buyer) {
+        console.log(id, buyer);
+        let shoe = await getShoeDetails(id);
+        let clients = Array(shoe.clients.emails);
+        console.log(typeof clients);
+    },
+
+
 
 }

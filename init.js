@@ -19,12 +19,12 @@ function init_loader() {
 }
 // OFFERS BUTTONS
 
-function buyShoes(event, id) {
+function buyShoes(event) {
     event.preventDefault()
     let shoeId = event.target.id;
     console.log(event.target.parentElement)
-    let client = JSON.parse(localStorage.getItem('auth')).email;
-    shoeServices.buyShoes(shoeId, client)              // to finish, buy the shoe
+    let buyer = JSON.parse(localStorage.getItem('auth')).email;
+    shoeServices.buyShoes(shoeId, buyer)              // to finish, buy the shoe
 }
 
 function detailsButton(event) {
