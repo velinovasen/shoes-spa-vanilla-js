@@ -13,11 +13,18 @@ const DOMSelectors = {
 
 
 function init_loader() {
-
+    console.log("VLIZA");
     navigate('home')
 
 }
 // OFFERS BUTTONS
+
+function detailsButton(event) {
+    event.preventDefault()
+    const href = '/details/' + event.target.parentElement.id;
+    console.log(event.target.parentElement);
+    navigate(href)
+}
 
 function createButton(event) {
     event.preventDefault()
