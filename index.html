@@ -100,8 +100,11 @@
                 <a onclick="editShoes(event)">Edit</a>
                 <a onclick="deleteShoes(event)">Delete</a>
                 {{else}}
-                <a onclick="buyShoes(event)" id="{{id}}">Buy</a>
+                {{#if isBuyer}}
                 <span>You bought it</span>
+                {{else}}
+                <a onclick="buyShoes(event)" id="{{id}}">Buy</a>
+                {{/if}}
                 {{/if}}
             </div>
         </div>

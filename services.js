@@ -71,8 +71,9 @@ const shoeServices = {
     async buyShoes(id, buyer) {
         console.log(id, buyer);
         let shoe = await getShoeDetails(id);
-        let clients = Array(shoe.clients.emails);
-        console.log(typeof clients);
+
+        // finish the shoe buy, should be patch, just add the buyers email in the clients
+        console.log(clients.includes(buyer));
     },
 
 

@@ -39,6 +39,11 @@ const router = async (fullPath) => {
             if (user.localId == templateData.create) {
                 templateData.owner = true;
             }
+            templateData.isBuyer = false;
+            let clients = templateData.clients.emails;    // check if the user bought the shoes already
+            if (clients.includes(buyer)) {
+                templateData.isBuyer = true;
+            }
             
         }
     }
