@@ -40,5 +40,39 @@ const authServices = {
         }
 
     }
+}
+
+
+const shoeServices = {
+    async createOffer(name, price, image, description, brand){ 
+
+        const creatorId = JSON.parse(localStorage.getItem('auth')).localId;
+
+        const response = await fetch(databaseURL + '.json', {
+            method: "POST",
+            body: JSON.stringify({
+                name,
+                price,
+                image,
+                description,
+                brand,
+                creatorId,
+                clients: {emails: '[]'}
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+    },
+
+    async getOffers() {
+        
+        const response = await fetch(databaseURL + '.json') 
+
+        const data = await response.json()
+
+        console.log(data)
+
+        return data;
+    }
 
 }

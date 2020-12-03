@@ -19,18 +19,7 @@
     </header>
     <main id="root">
 
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- ROOT SECTION  -->
 
     </main>
     <footer>
@@ -39,6 +28,25 @@
 
     <script type="text/x-handlebars-template" id="home-template">
         <div class="container">
+            {{#if isAuth}}
+            {{#if shoes}}
+            <div class="shoes">
+            {{#each shoes}}
+                <div class="shoe">
+                    <img
+                        src="{{this.image}}">
+                    <h3>{{this.brand}} {{this.name}}</h3>
+                    <a>Buy it for ${{this.price}}</a>
+                </div>
+            {{/each}}
+            </div>
+            {{else}}
+            <h1>No shoes to display. Be the first to create a new offer...</h1>
+            {{/if}}
+
+
+
+            {{else}}
             <div class="about-us">
                 <div>
                     <img src="../public/shoes.jpg" alt="">
@@ -48,6 +56,7 @@
                     <a href="/register" onclick="onRegisterButton(event)">Register Now</a> and Try it!
                 </p>
             </div>
+            {{/if}}
         </div>
     </script>
 

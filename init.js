@@ -1,3 +1,7 @@
+const regex = {
+    imageUrl: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+}
+
 const DOMSelectors = {
     nameInput: () => document.getElementById('nameInput'),
     priceInput: () => document.getElementById('priceInput'),
@@ -24,12 +28,14 @@ function createButton(event) {
     const description = DOMSelectors.descriptionInput().value;
     const brand = DOMSelectors.brandInput().value;
 
-    if (!name || !price || !image || !description || !brand) {
+    const validator = correctInputChecker(name, price, image, description, brand);
+    
+    if (!validator) {
         return;
     }
-    
-    const checker = correctInputChecker(name, price, image, description, brand);
-    
+
+    shoeServices.createOffer(name, price, image, description, brand)
+
     DOMSelectors.nameInput().value = '';
     DOMSelectors.priceInput().value = '';
     DOMSelectors.imageInput().value = '';
@@ -38,6 +44,7 @@ function createButton(event) {
 
     console.log(name, price, image, description, brand)
 
+    setTimeout(function() {navigate('home')}, 700)
 
 }
 
@@ -106,6 +113,7 @@ function homeButton(event) {
     event.preventDefault()
 
     navigate(event.target.parentElement.href)
+
 }
 
 function logoutButton(event) {
@@ -125,8 +133,28 @@ window.addEventListener('popstate', (e) => {
 
 function correctInputChecker(name, price, image, description, brand){
 
-    if (/[A-z]+$/.test(name)) {
-        console.log('correct name')
+    let isOk = true;            // NEW OFFER VALIDATIONS
+
+    if (!/[A-z]+$/.test(name)) {
+        isOk = false;
+        return isOk;
     }
+    if (!/(^\d+\.\d+$|^\d+$)/.test(price)) {
+        isOk = false;
+        return isOk;
+    }
+    if (!regex.imageUrl.test(image)) {
+        isOk = false;
+        return isOk;
+    }
+    if (!/.+/.test(description)) {
+        isOk = false;
+        return isOk;
+    }
+    if (!/([A-z0-9])\w+/.test(brand)) {
+        isOk = false;
+        return isOk;
+    }
+    return isOk;
 
 }

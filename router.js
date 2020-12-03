@@ -12,10 +12,12 @@ const router = async (fullPath) => {
     let templateData = {};
     if (Boolean(localStorage.getItem('auth'))) {
         const user = JSON.parse(localStorage.getItem('auth'))
-        templateData.isAuth = true
-        templateData.email = user['email']                 // setting the correct navbar on every click
+        const shoes = await getOffers();
+        templateData.isAuth = true;
+        templateData.shoes = shoes;
+        templateData.email = user['email'];                 // setting the correct navbar on every click
     } else {
-        templateData.isAuth = false
+        templateData.isAuth = false;
     }
     console.log(templateData)
     //navbar
@@ -38,4 +40,15 @@ function navigate(path) {
     history.pushState({}, '', path)
 
     router(location.pathname.slice(1))
+}
+
+async function getOffers() {
+        
+    const response = await fetch('https://shoe-shelf-df245.firebaseio.com/.json') 
+
+    const data = await response.json()
+   
+    console.log(data)
+
+    return data;
 }
