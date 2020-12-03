@@ -17,11 +17,23 @@ function init_loader() {
 
 function createButton(event) {
     event.preventDefault()
+
     const name = DOMSelectors.nameInput().value;
     const price = DOMSelectors.priceInput().value;
     const image = DOMSelectors.imageInput().value;
     const description = DOMSelectors.descriptionInput().value;
     const brand = DOMSelectors.brandInput().value;
+
+    if (!name || !price || !image || !description || !brand) {
+        return;
+    }
+    
+    DOMSelectors.nameInput().value = '';
+    DOMSelectors.priceInput().value = '';
+    DOMSelectors.imageInput().value = '';
+    DOMSelectors.descriptionInput().value = '';
+    DOMSelectors.brandInput().value = '';
+
     console.log(name, price, image, description, brand)
 }
 
