@@ -33,9 +33,10 @@ const router = async (fullPath) => {
             const shoeDetails = await getShoeDetails(id);
 
             templateData = shoeDetails;
+            templateData.id = id;
             templateData.owner = false;
             console.log(user.localId, id);
-            if (user.localId == templateData.creatorId) {
+            if (user.localId == templateData.create) {
                 templateData.owner = true;
             }
             

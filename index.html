@@ -97,10 +97,10 @@
             </div>
             <div class="actions">
                 {{#if owner}}
-                <a>Edit</a>
-                <a>Delete</a>
+                <a onclick="editShoes(event)">Edit</a>
+                <a onclick="deleteShoes(event)">Delete</a>
                 {{else}}
-                <a>Buy</a>
+                <a onclick="buyShoes(event)" id="{{id}}">Buy</a>
                 <span>You bought it</span>
                 {{/if}}
             </div>

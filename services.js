@@ -15,15 +15,7 @@ const authServices = {
     },
 
     async loginUser(email, password) {
-        // const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
-        //     method: "POST",
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify({email, password})
-        // })
 
-        // const user = await response.json();
         const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
             method: "POST",
             headers: {
@@ -44,6 +36,7 @@ const authServices = {
 
 
 const shoeServices = {
+
     async createOffer(name, price, image, description, brand){ 
 
         const creatorId = JSON.parse(localStorage.getItem('auth')).localId;
@@ -73,6 +66,10 @@ const shoeServices = {
         console.log(data)
 
         return data;
+    },
+
+    async buyShoes(id, client) {
+        console.log(id, client)
     }
 
 }
