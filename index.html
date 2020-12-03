@@ -56,22 +56,22 @@
         <p class="message"></p>
         <form>
             <div>
-                <input type="text" placeholder="Name...">
+                <input type="text" placeholder="Name..." id="nameInput">
             </div>
             <div>
-                <input type="text" placeholder="Price...">
+                <input type="text" placeholder="Price..." id="priceInput">
             </div>
             <div>
-                <input type="text" placeholder="Image url...">
+                <input type="text" placeholder="Image url..."  id="imageInput">
             </div>
             <div>
-                <textarea placeholder="Give us some description about this offer..."></textarea>
+                <textarea placeholder="Give us some description about this offer..." id="descriptionInput" ></textarea>
             </div>
             <div>
-                <input type="text" placeholder="Brand...">
+                <input type="text" placeholder="Brand..." id="brandInput">
             </div>
             <div>
-                <button>Create</button>
+                <button id="createOfferButton" onclick="createButton(event)">Create</button>
             </div>
         </form>
     </script>
@@ -208,22 +208,22 @@
             {{#if isAuth}}
                 <ul>
                     <li>
-                        <a href="">Create new offer</a>
+                        <a href="/create" onclick="createNewOffer(event)">Create new offer</a>
                     </li> 
                     <li class="site-logo">Shoe</li>
                     <li>
-                        <a href=""><img src="../public/sneakers.png" alt=""></a>
+                        <a href="/home" onclick="homeButton(event)"><img src="../public/sneakers.png" alt=""></a>
                     </li> 
                     <li class="site-logo">Shelf</li>
-                    <li>Welcome, xxx@xx.xxx | 
-                        <a  href="">Logout</a>
+                    <li>Welcome, {{ email }} | 
+                        <a href="/logout" onclick="logoutButton(event)">Logout</a>
                     </li>
                 </ul>
             {{else}}
                 <ul>
                     <li class="site-logo">Shoe</li>
                     <li>
-                        <a href=""><img src="../public/sneakers.png" alt=""></a>
+                        <a href="/home" onclick="homeButton(event)"><img src="../public/sneakers.png" alt=""></a>
                     </li> 
                     <li class="site-logo">Shelf</li>
                 </ul>

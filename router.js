@@ -2,6 +2,8 @@ const routes = {
     'home': 'home-template',
     'register': 'register-template',
     'login': 'login-template',
+    'create': 'new-offer-template',
+    
     
 }
 
@@ -9,7 +11,9 @@ const router = async (fullPath) => {
     console.log(fullPath)
     let templateData = {};
     if (Boolean(localStorage.getItem('auth'))) {
-        templateData.isAuth = true                          // setting the correct navbar on every click
+        const user = JSON.parse(localStorage.getItem('auth'))
+        templateData.isAuth = true
+        templateData.email = user['email']                 // setting the correct navbar on every click
     } else {
         templateData.isAuth = false
     }
@@ -20,7 +24,7 @@ const router = async (fullPath) => {
 
     head.innerHTML = navTemplate(templateData)
 
-    //body
+    //root
     let root = document.getElementById('root');
 
     let template = Handlebars.compile(document.getElementById(routes[fullPath]).innerHTML);

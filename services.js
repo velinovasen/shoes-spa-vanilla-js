@@ -10,22 +10,35 @@ const authServices = {
             },
             body: JSON.stringify({email, password})
         })
+        const data = await response.json()
+        return data;
     },
 
     async loginUser(email, password) {
+        // const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
+        //     method: "POST",
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify({email, password})
+        // })
+
+        // const user = await response.json();
         const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify({email, password})
-        })
-
-        const user = await response.json();
+            body: JSON.stringify({email, password})}
+        )
         
-        localStorage.setItem('auth', JSON.stringify(user))
+        const user = await response.json()
+        console.log(user)
+        if (!user.error) {
+            localStorage.setItem('auth', JSON.stringify(user))
+            return user;
+        }
 
-        return user;
     }
 
 }

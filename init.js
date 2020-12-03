@@ -1,9 +1,32 @@
+const DOMSelectors = {
+    nameInput: () => document.getElementById('nameInput'),
+    priceInput: () => document.getElementById('priceInput'),
+    imageInput: () => document.getElementById('imageInput'),
+    descriptionInput: () => document.getElementById('descriptionInput'),
+    brandInput: () => document.getElementById('brandInput'),
+
+}
+
 
 function init_loader() {
 
     navigate('home')
 
 }
+// OFFERS BUTTONS
+
+function createButton(event) {
+    event.preventDefault()
+    const name = DOMSelectors.nameInput().value;
+    const price = DOMSelectors.priceInput().value;
+    const image = DOMSelectors.imageInput().value;
+    const description = DOMSelectors.descriptionInput().value;
+    const brand = DOMSelectors.brandInput().value;
+    console.log(name, price, image, description, brand)
+}
+
+
+// LOGIN AND REGISTER BUTTONS
 
 function onRegisterButton(event) {      // register button click, redirect to register template
     event.preventDefault()
@@ -28,11 +51,8 @@ function loginSubmitButton(event) {
     let password = document.getElementById('password-login-input').value;
 
     authServices.loginUser(email, password)
-    .then(res => navigate('home'))
-    .catch(e => {
-        console.log('WRONG CREDENTIALS');
-        return; 
-    })
+    setTimeout(function() {navigate('home')}, 700)
+    
     
 }
 
@@ -50,16 +70,37 @@ function registerSubmitButton(event) {
         return;
     }
 
-    authServices.registerUser(email, password)
-    .then(res => {
-        authServices.loginUser(email, password)
-    .then(data => {
-       navigate('home')
-    })})
+    const data = authServices.registerUser(email, password)
+    
+    console.log(data);
     
   
     //to FINISH
 }
 
+// NAVBAR BUTTONS 
+
+function createNewOffer(event) {
+    event.preventDefault()
+
+    navigate(event.target.href)
+}
+
+function homeButton(event) {
+    event.preventDefault()
+
+    navigate(event.target.parentElement.href)
+}
+
+function logoutButton(event) {
+    event.preventDefault()
+
+    localStorage.removeItem('auth')
+    setTimeout(function(){navigate('home')}, 700)
+}
 
 init_loader()
+
+window.addEventListener('popstate', (e) => {
+    router(location.pathname.slice(1))  
+})
