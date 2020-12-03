@@ -28,6 +28,8 @@ function createButton(event) {
         return;
     }
     
+    const checker = correctInputChecker(name, price, image, description, brand);
+    
     DOMSelectors.nameInput().value = '';
     DOMSelectors.priceInput().value = '';
     DOMSelectors.imageInput().value = '';
@@ -35,6 +37,8 @@ function createButton(event) {
     DOMSelectors.brandInput().value = '';
 
     console.log(name, price, image, description, brand)
+
+
 }
 
 
@@ -116,3 +120,13 @@ init_loader()
 window.addEventListener('popstate', (e) => {
     router(location.pathname.slice(1))  
 })
+
+// extra functions
+
+function correctInputChecker(name, price, image, description, brand){
+
+    if (/[A-z]+$/.test(name)) {
+        console.log('correct name')
+    }
+
+}
