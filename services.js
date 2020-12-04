@@ -11,7 +11,9 @@ const authServices = {
             body: JSON.stringify({email, password})
         })
         const data = await response.json()
+        await this.loginUser(email, password)
         return data;
+        
     },
 
     async loginUser(email, password) {
@@ -25,7 +27,6 @@ const authServices = {
         )
         
         const user = await response.json()
-        console.log(user)
         if (!user.error) {
             localStorage.setItem('auth', JSON.stringify(user))
             return user;
@@ -50,11 +51,11 @@ const shoeServices = {
                 description,
                 brand,
                 creatorId,
-                clients: {emails: '[]'}
+                clients: {emails: '[]'},
+                bought: 0
             })
         })
         const data = await response.json()
-        console.log(data)
     },
 
     async getOffers() {
@@ -63,18 +64,43 @@ const shoeServices = {
 
         const data = await response.json()
 
-        console.log(data)
-
         return data;
     },
 
     async buyShoes(id, buyer) {
-        console.log(id, buyer);
         let shoe = await getShoeDetails(id);
-
+        let clients = shoe.clients.emails;
+        let bought = Number(shoe.bought) + 1;
+        console.log(typeof bought);
+        clients = clients.slice(0, -1)
         // finish the shoe buy, should be patch, just add the buyers email in the clients
-        console.log(clients.includes(buyer));
+        clients += buyer + ", ]";
+        console.log(clients);
+        
+        const response = await fetch(databaseURL + id + '.json', {
+            method: "PATCH",
+            body: JSON.stringify({
+                'clients': {'emails': clients},
+                'bought': bought
+            })
+        })
+
     },
+
+    async editShoeFetch(id, shoe) {
+        const response = await fetch(databaseURL + id + '.json', {
+            method: "PATCH",
+            body: JSON.stringify(shoe)
+        })
+        
+       
+    },
+
+    async deleteShoeFetch(id) {
+        const response = await fetch(databaseURL + id + '.json', {
+            method: "DELETE"
+        })
+    }
 
 
 

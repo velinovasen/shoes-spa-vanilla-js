@@ -8,30 +8,70 @@ const DOMSelectors = {
     imageInput: () => document.getElementById('imageInput'),
     descriptionInput: () => document.getElementById('descriptionInput'),
     brandInput: () => document.getElementById('brandInput'),
-
+    editNameInput: () => document.getElementById('editNameInput'),
+    editPriceInput: () => document.getElementById('editPriceInput'),
+    editImageInput: () => document.getElementById('editImageInput'),
+    editDescriptionInput: () => document.getElementById('editDescriptionInput'),
+    editBrandInput: () => document.getElementById('editBrandInput'),
 }
 
 
 function init_loader() {
-    console.log("VLIZA");
+
     navigate('home')
 
 }
 // OFFERS BUTTONS
 
+function deleteShoe(event) {
+    event.preventDefault()
+    const id = event.target.id;
+
+    shoeServices.deleteShoeFetch(id)
+    console.log('DELETED');
+    setTimeout(function() { navigate('/home') }, 700)
+}
+
+async function editShoeButtonSubmit(event) {
+    event.preventDefault()
+    const id = event.target.id
+    const name = DOMSelectors.editNameInput().value;
+    const price = DOMSelectors.editPriceInput().value;
+    const image = DOMSelectors.editImageInput().value;
+    const description = DOMSelectors.editDescriptionInput().value;
+    const brand = DOMSelectors.editBrandInput().value;
+
+    const isOk = correctInputChecker(name, price, image, description, brand);
+
+    if (isOk) {
+    console.log(id, name, price, image, description, brand);
+       shoeServices.editShoeFetch(id, {name, price, image, description, brand})
+    
+       setTimeout(function() { navigate('/details/' + id) }, 700)
+    }
+
+}
+
+function editShoes(event) {
+    event.preventDefault()
+
+    navigate('/edit/' + event.target.id);
+}
+
 function buyShoes(event) {
     event.preventDefault()
     let shoeId = event.target.id;
     console.log(event.target.parentElement)
-    let buyer = JSON.parse(localStorage.getItem('auth')).email;
-    shoeServices.buyShoes(shoeId, buyer)              // to finish, buy the shoe
+    let user = JSON.parse(localStorage.getItem('auth'))
+    let buyer = user.email;
+    shoeServices.buyShoes(shoeId, buyer)          // to finish, buy the shoe
+    setTimeout(function() { navigate('/details/' + shoeId) }, 700)    
 }
 
 function detailsButton(event) {
     event.preventDefault()
-    const href = '/details/' + event.target.parentElement.id;
-    console.log(event.target.parentElement);
-    navigate(href)
+
+    navigate('/details/' + event.target.parentElement.id)
 }
 
 function createButton(event) {
@@ -108,10 +148,10 @@ function registerSubmitButton(event) {
         return;
     }
 
-    const data = authServices.registerUser(email, password)
+    const data = authServices.registerUser(email, password);
     
     console.log(data);
-    
+    setTimeout(function() {navigate('home')}, 700);
   
     //to FINISH
 }

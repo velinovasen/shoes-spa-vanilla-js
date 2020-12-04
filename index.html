@@ -29,7 +29,7 @@
     <script type="text/x-handlebars-template" id="home-template">
         <div class="container">
             {{#if isAuth}}
-            {{#if shoes}}
+            {{#if hasShoes}}
             <div class="shoes">
             {{#each shoes}}
                 <div class="shoe" id="{{key}}" onclick="detailsButton(event)">    
@@ -92,13 +92,15 @@
                 <div class="description">{{description}}
                     <br>
                     <br>
+                    
+                    <p><b>Buyers:</b> {{bought}}</p> <br>
                     <p class="price">${{price}}</p>
                 </div>
             </div>
             <div class="actions">
                 {{#if owner}}
-                <a onclick="editShoes(event)">Edit</a>
-                <a onclick="deleteShoes(event)">Delete</a>
+                <a onclick="editShoes(event)" id="{{id}}">Edit</a>
+                <a onclick="deleteShoe(event) "id="{{id}}">Delete</a>
                 {{else}}
                 {{#if isBuyer}}
                 <span>You bought it</span>
@@ -115,22 +117,22 @@
         <p class="message"></p>
         <form>
             <div>
-                <input type="text" placeholder="Name...">
+                <input type="text" placeholder="Name..." value="{{name}}" id="editNameInput">
             </div>
             <div>
-                <input type="text" placeholder="Price...">
+                <input type="text" placeholder="Price..." value="{{price}}" id="editPriceInput">
             </div>
             <div>
-                <input type="text" placeholder="Image url...">
+                <input type="text" placeholder="Image url..." value="{{image}}" id="editImageInput">
             </div>
             <div>
-                <textarea placeholder="Give us some description about this offer..."></textarea>
+                <textarea placeholder="Give us some description about this offer..." id="editDescriptionInput">{{description}}</textarea>
             </div>
             <div>
-                <input type="text" placeholder="Brand...">
+                <input type="text" placeholder="Brand..." value="{{brand}}" id="editBrandInput">
             </div>
             <div>
-                <button>Edit</button>
+                <button onclick="editShoeButtonSubmit(event)" id={{id}}>Edit</button>
             </div>
         </form>
     </script>
